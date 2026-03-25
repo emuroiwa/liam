@@ -10,6 +10,7 @@ type Task = {
   description: string
   type: string
   interactiveType?: 'quiz' | 'flashcard' | 'reading' | 'typing'
+  interactiveContent?: any
   completed: boolean
 }
 
@@ -25,7 +26,7 @@ export default function StudyHelperTab() {
   const [currentDay, setCurrentDay] = useState<number>(1)
   const [schedule, setSchedule] = useState<Record<number, DaySchedule>>({})
   const [loading, setLoading] = useState(true)
-  const [activeTask, setActiveTask] = useState<{ id: string; type: 'quiz' | 'flashcard' | 'reading' | 'typing' } | null>(null)
+  const [activeTask, setActiveTask] = useState<{ id: string; type: 'quiz' | 'flashcard' | 'reading' | 'typing', content: any } | null>(null)
 
   useEffect(() => {
     const today = new Date().getDay() // 0 is Sunday, 1 is Monday...
@@ -70,6 +71,7 @@ export default function StudyHelperTab() {
           description: task.description,
           type: task.subject,
           interactiveType: task.interactive_type,
+          interactiveContent: task.interactive_content,
           completed: completedIds.has(task.id)
         })
       }
@@ -206,7 +208,7 @@ export default function StudyHelperTab() {
                   {!task.completed && task.interactiveType && (
                     <div className="pt-2 border-t border-gray-200 dark:border-gray-600/50">
                       <button 
-                        onClick={() => setActiveTask({ id: task.id, type: task.interactiveType! })}
+                        onClick={() => setActiveTask({ id: task.id, type: task.interactiveType!, content: task.interactiveContent })}
                         className="w-full py-2.5 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-300 dark:hover:bg-indigo-900/50 rounded-xl text-sm font-bold transition-colors flex items-center justify-center gap-2"
                       >
                         {task.interactiveType === 'quiz' && '📝 Start Quiz Practice'}
@@ -238,6 +240,7 @@ export default function StudyHelperTab() {
         <InteractiveStudyModal 
           taskId={activeTask.id}
           interactiveType={activeTask.type}
+          content={activeTask.content}
           onClose={() => setActiveTask(null)}
           onComplete={() => {
             handleToggleTask(activeTask.id, false)
