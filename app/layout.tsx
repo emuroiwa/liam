@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: "Liam's Reward Tracker",
+  title: "Funda Liam",
   description: 'Track points, earn rewards, and stay motivated!',
 }
 

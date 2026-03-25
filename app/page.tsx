@@ -5,14 +5,16 @@ import RulesTab from '@/components/tabs/RulesTab'
 import PointsTab from '@/components/tabs/PointsTab'
 import RewardsTab from '@/components/tabs/RewardsTab'
 import BoredomBusterTab from '@/components/tabs/BoredomBusterTab'
+import StudyHelperTab from '@/components/tabs/StudyHelperTab'
 
-type Tab = 'rules' | 'tracker' | 'rewards' | 'buster'
+type Tab = 'rules' | 'tracker' | 'rewards' | 'buster' | 'study'
 
 const tabs: { id: Tab; label: string; emoji: string }[] = [
-  { id: 'rules', label: 'Rules', emoji: '📋' },
+  { id: 'study', label: 'Study', emoji: '📚' },
   { id: 'tracker', label: 'Tracker', emoji: '⭐' },
   { id: 'rewards', label: 'Rewards', emoji: '🎁' },
-  { id: 'buster', label: 'I am bored', emoji: '🎲' },
+  { id: 'buster', label: 'Bored?', emoji: '🎲' },
+  { id: 'rules', label: 'Rules', emoji: '📋' },
 ]
 
 export default function Home() {
@@ -23,7 +25,7 @@ export default function Home() {
       {/* Fixed header */}
       <header className="sticky top-0 z-30 bg-primary text-white shadow-md">
         <div className="max-w-lg mx-auto px-4 py-3 flex items-center justify-between">
-          <h1 className="text-lg font-bold tracking-tight">Liam&apos;s Reward Tracker</h1>
+          <h1 className="text-lg font-bold tracking-tight">Funda Liam</h1>
           <span className="text-2xl">⭐</span>
         </div>
 
@@ -52,6 +54,7 @@ export default function Home() {
         {activeTab === 'tracker' && <PointsTab />}
         {activeTab === 'rewards' && <RewardsTab />}
         {activeTab === 'buster' && <BoredomBusterTab />}
+        {activeTab === 'study' && <StudyHelperTab />}
       </main>
     </div>
   )
