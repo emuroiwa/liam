@@ -17,7 +17,7 @@ const quickEarnButtons = [
 ]
 
 const quickSpendButtons = [
-  { label: 'PS5 1hr', pts: -10, emoji: '🎮' },
+  { label: 'PS5 1hr', pts: -15, emoji: '🎮' },
   { label: 'Phone 30min', pts: -5, emoji: '📱' },
 ]
 
@@ -176,6 +176,22 @@ export default function PointsTab() {
     }
   }
 
+  const handleDeleteLog = async (id: string) => {
+    const ok = window.confirm('Are you sure you want to delete this entry?')
+    if (!ok) return
+    setSubmitting(true)
+    try {
+      const { error } = await supabase.from('points_log').delete().eq('id', id)
+      if (error) throw error
+      await fetchData()
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : 'Failed to delete entry'
+      alert(`Error: ${msg}`)
+    } finally {
+      setSubmitting(false)
+    }
+  }
+
   // Computed values
   const totalPoints = logs.reduce((sum, log) => sum + log.points, 0)
   const weekStart = getWeekStart(resets)
@@ -205,7 +221,7 @@ export default function PointsTab() {
       <div className="flex items-center justify-center py-20">
         <div className="flex flex-col items-center gap-3">
           <div className="w-10 h-10 border-4 border-primary/20 border-t-primary rounded-full animate-spin" />
-          <p className="text-sm text-gray-500">Loading your points...</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500">Loading your points...</p>
         </div>
       </div>
     )
@@ -230,16 +246,16 @@ export default function PointsTab() {
         <div className="text-5xl font-extrabold text-primary mb-1">
           ⭐ {totalPoints}
         </div>
-        <p className="text-sm text-gray-500 font-medium">Your total balance</p>
+        <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 font-medium">Your total balance</p>
 
         {/* Streak */}
         <div className="mt-3">
           {streak > 0 ? (
-            <span className="inline-flex items-center gap-1 bg-orange-50 text-orange-600 text-sm font-semibold px-3 py-1 rounded-full">
+            <span className="inline-flex items-center gap-1 bg-orange-50 dark:bg-orange-900/30 text-orange-600 dark:text-orange-300 text-sm font-semibold px-3 py-1 rounded-full">
               🔥 {streak} day streak
             </span>
           ) : (
-            <span className="text-xs text-gray-400">Start your streak today!</span>
+            <span className="text-xs text-gray-400 dark:text-gray-500">Start your streak today!</span>
           )}
         </div>
       </div>
@@ -247,23 +263,23 @@ export default function PointsTab() {
       {/* Progress to milestone */}
       <div className="card">
         <div className="flex justify-between items-center mb-2">
-          <span className="text-sm font-semibold text-gray-700">Next milestone</span>
+          <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">Next milestone</span>
           <span className="text-sm font-bold text-primary">{milestone} pts</span>
         </div>
-        <div className="w-full bg-gray-100 rounded-full h-3 overflow-hidden">
+        <div className="w-full bg-gray-100 dark:bg-gray-800 rounded-full h-3 overflow-hidden">
           <div
             className="h-3 rounded-full bg-primary transition-all duration-500"
             style={{ width: `${milestoneProgress}%` }}
           />
         </div>
-        <p className="text-xs text-gray-500 mt-1.5 text-right">
+        <p className="text-xs text-gray-500 dark:text-gray-400 dark:text-gray-500 mt-1.5 text-right">
           {ptsToMilestone} pts to go
         </p>
       </div>
 
       {/* 7-day grid */}
       <div className="card">
-        <h3 className="font-semibold text-gray-700 text-sm mb-3">This week</h3>
+        <h3 className="font-semibold text-gray-700 dark:text-gray-300 text-sm mb-3">This week</h3>
         <div className="grid grid-cols-7 gap-1">
           {DAYS.map((day, i) => {
             const pts = weekDayTotals[i]
@@ -271,14 +287,14 @@ export default function PointsTab() {
             return (
               <div key={day} className="flex flex-col items-center gap-1">
                 <span
-                  className={`text-xs font-medium ${isToday ? 'text-primary' : 'text-gray-400'}`}
+                  className={`text-xs font-medium ${isToday ? 'text-primary' : 'text-gray-400 dark:text-gray-500'}`}
                 >
                   {day}
                 </span>
                 <div
                   className={`w-full aspect-square rounded-lg flex items-center justify-center text-xs font-bold transition-colors
                     ${isToday ? 'ring-2 ring-primary ring-offset-1' : ''}
-                    ${pts > 0 ? 'bg-earn-bg text-earn-text' : pts < 0 ? 'bg-red-50 text-spend-red' : 'bg-gray-100 text-gray-400'}
+                    ${pts > 0 ? 'bg-earn-bg text-earn-text' : pts < 0 ? 'bg-red-50 text-spend-red' : 'bg-gray-100 dark:bg-gray-800 text-gray-400 dark:text-gray-500'}
                   `}
                 >
                   {pts !== 0 ? (pts > 0 ? `+${pts}` : pts) : '–'}
@@ -291,7 +307,7 @@ export default function PointsTab() {
 
       {/* Quick earn buttons */}
       <div>
-        <h3 className="font-semibold text-gray-700 text-sm mb-2">Quick earn</h3>
+        <h3 className="font-semibold text-gray-700 dark:text-gray-300 text-sm mb-2">Quick earn</h3>
         <div className="grid grid-cols-2 gap-2">
           {quickEarnButtons.map((btn) => (
             <button
@@ -309,7 +325,7 @@ export default function PointsTab() {
 
       {/* Spend buttons */}
       <div>
-        <h3 className="font-semibold text-gray-700 text-sm mb-2">Spend points</h3>
+        <h3 className="font-semibold text-gray-700 dark:text-gray-300 text-sm mb-2">Spend points</h3>
         <div className="grid grid-cols-2 gap-2">
           {quickSpendButtons.map((btn) => (
             <button
@@ -327,7 +343,7 @@ export default function PointsTab() {
 
       {/* Custom add */}
       <div className="card">
-        <h3 className="font-semibold text-gray-700 text-sm mb-3">Custom entry</h3>
+        <h3 className="font-semibold text-gray-700 dark:text-gray-300 text-sm mb-3">Custom entry</h3>
         <div className="space-y-2">
           <input
             type="number"
@@ -357,13 +373,13 @@ export default function PointsTab() {
       {/* Recent activity */}
       {logs.length > 0 && (
         <div className="card">
-          <h3 className="font-semibold text-gray-700 text-sm mb-3">Recent activity</h3>
+          <h3 className="font-semibold text-gray-700 dark:text-gray-300 text-sm mb-3">Recent activity</h3>
           <ul className="space-y-2 max-h-64 overflow-y-auto scrollbar-hide">
             {logs.slice(0, 15).map((log) => (
-              <li key={log.id} className="flex items-center justify-between py-1.5 border-b border-gray-50 last:border-0">
+              <li key={log.id} className="flex items-center justify-between py-1.5 border-b border-gray-50 dark:border-gray-800 last:border-0">
                 <div>
-                  <p className="text-sm font-medium text-gray-800">{log.label}</p>
-                  <p className="text-xs text-gray-400">
+                  <p className="text-sm font-medium text-gray-800 dark:text-gray-200">{log.label}</p>
+                  <p className="text-xs text-gray-400 dark:text-gray-500">
                     {new Date(log.created_at).toLocaleDateString('en-GB', {
                       weekday: 'short',
                       day: 'numeric',
@@ -373,13 +389,24 @@ export default function PointsTab() {
                     })}
                   </p>
                 </div>
-                <span
-                  className={`text-sm font-bold ${
-                    log.points > 0 ? 'text-earn-text' : 'text-spend-red'
-                  }`}
-                >
-                  {log.points > 0 ? `+${log.points}` : log.points}
-                </span>
+                <div className="flex items-center gap-3">
+                  <span
+                    className={`text-sm font-bold ${
+                      log.points > 0 ? 'text-earn-text' : 'text-spend-red'
+                    }`}
+                  >
+                    {log.points > 0 ? `+${log.points}` : log.points}
+                  </span>
+                  <button
+                    onClick={() => handleDeleteLog(log.id)}
+                    disabled={submitting}
+                    className="text-gray-400 dark:text-gray-500 hover:text-red-500 transition-colors disabled:opacity-50 text-xs"
+                    title="Delete entry"
+                    aria-label="Delete entry"
+                  >
+                    🗑️
+                  </button>
+                </div>
               </li>
             ))}
           </ul>
@@ -391,7 +418,7 @@ export default function PointsTab() {
         <button
           onClick={handleResetWeek}
           disabled={submitting}
-          className="w-full py-3 text-sm text-gray-500 border border-dashed border-gray-300 rounded-xl hover:border-gray-400 hover:text-gray-700 transition-colors disabled:opacity-50"
+          className="w-full py-3 text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500 border border-dashed border-gray-300 dark:border-gray-600 rounded-xl hover:border-gray-400 hover:text-gray-700 dark:text-gray-300 transition-colors disabled:opacity-50"
         >
           🔄 Reset weekly view
         </button>

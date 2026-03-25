@@ -38,10 +38,10 @@ const activities: Activity[] = [
 ]
 
 const categoryColors: Record<Category, { bg: string; text: string; badge: string }> = {
-  Active: { bg: 'bg-orange-50', text: 'text-orange-800', badge: 'bg-orange-100 text-orange-700' },
+  Active: { bg: 'bg-orange-50 dark:bg-orange-900/30', text: 'text-orange-800', badge: 'bg-orange-100 text-orange-700' },
   Creative: { bg: 'bg-pink-50', text: 'text-pink-800', badge: 'bg-pink-100 text-pink-700' },
   Outdoor: { bg: 'bg-green-50', text: 'text-green-800', badge: 'bg-green-100 text-green-700' },
-  Learning: { bg: 'bg-blue-50', text: 'text-blue-800', badge: 'bg-blue-100 text-blue-700' },
+  Learning: { bg: 'bg-blue-50 dark:bg-blue-900/30', text: 'text-blue-800', badge: 'bg-blue-100 text-blue-700' },
 }
 
 const encouragements = [
@@ -114,7 +114,7 @@ export default function BoredomBusterTab() {
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <h2 className="text-xl font-bold text-gray-900">Boredom Buster</h2>
+        <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100">I am bored</h2>
         <button
           onClick={handleShuffle}
           className="flex items-center gap-1.5 bg-primary text-white text-sm font-semibold px-4 py-2 rounded-xl hover:bg-primary-dark transition-colors active:scale-95 transform"
@@ -123,7 +123,7 @@ export default function BoredomBusterTab() {
         </button>
       </div>
 
-      <p className="text-sm text-gray-500">
+      <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500">
         Tap an activity to do it. Activities with points will add to your total!
       </p>
 
@@ -160,7 +160,7 @@ export default function BoredomBusterTab() {
               </div>
 
               {msg && (
-                <div className="text-xs font-semibold text-center w-full py-1 bg-white/70 rounded-lg text-gray-700 animate-pulse">
+                <div className="text-xs font-semibold text-center w-full py-1 bg-white dark:bg-gray-800/70 rounded-lg text-gray-700 dark:text-gray-300 animate-pulse">
                   {msg}
                 </div>
               )}
@@ -169,7 +169,7 @@ export default function BoredomBusterTab() {
         })}
       </div>
 
-      <p className="text-xs text-center text-gray-400 pb-4">
+      <p className="text-xs text-center text-gray-400 dark:text-gray-500 pb-4">
         Showing 8 of {activities.length} activities — shuffle for more!
       </p>
     </div>

@@ -8,7 +8,7 @@
   }
 
   body {
-    @apply bg-gray-50 text-gray-900 font-sans;
+    @apply bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 font-sans;
   }
 
   * {
@@ -18,11 +18,11 @@
 
 @layer components {
   .tab-btn {
-    @apply flex flex-col items-center justify-center gap-1 flex-1 py-2 text-xs font-medium text-gray-500 transition-colors duration-150 relative;
+    @apply flex flex-col items-center justify-center gap-1 flex-1 py-2 text-xs font-medium text-gray-500 dark:text-gray-400 transition-colors duration-150 relative;
   }
 
   .tab-btn.active {
-    @apply text-primary;
+    @apply text-primary dark:text-indigo-400;
   }
 
   .tab-btn.active::after {
@@ -31,23 +31,23 @@
   }
 
   .card {
-    @apply bg-white rounded-2xl shadow-sm border border-gray-100 p-4;
+    @apply bg-white dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-800 p-4;
   }
 
   .btn-primary {
-    @apply bg-primary hover:bg-primary-dark text-white font-semibold rounded-xl px-4 py-3 min-h-[48px] transition-colors duration-150 active:scale-95 transform;
+    @apply bg-primary hover:bg-primary-dark dark:bg-indigo-500 dark:hover:bg-indigo-600 text-white font-semibold rounded-xl px-4 py-3 min-h-[48px] transition-colors duration-150 active:scale-95 transform;
   }
 
   .btn-earn {
-    @apply bg-earn-bg hover:bg-green-100 text-earn-text font-semibold rounded-xl px-4 py-3 min-h-[48px] transition-colors duration-150 active:scale-95 transform text-sm;
+    @apply bg-earn-bg dark:bg-green-900/40 hover:bg-green-100 dark:hover:bg-green-900/60 text-earn-text dark:text-green-400 font-semibold rounded-xl px-4 py-3 min-h-[48px] transition-colors duration-150 active:scale-95 transform text-sm;
   }
 
   .btn-spend {
-    @apply bg-red-50 hover:bg-red-100 text-spend-red font-semibold rounded-xl px-4 py-3 min-h-[48px] transition-colors duration-150 active:scale-95 transform text-sm;
+    @apply bg-red-50 dark:bg-red-900/40 hover:bg-red-100 dark:hover:bg-red-900/60 text-spend-red dark:text-red-400 font-semibold rounded-xl px-4 py-3 min-h-[48px] transition-colors duration-150 active:scale-95 transform text-sm;
   }
 
   .input-field {
-    @apply w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-colors duration-150;
+    @apply w-full border border-gray-200 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 dark:focus:ring-indigo-500/30 focus:border-primary dark:focus:border-indigo-500 transition-colors duration-150;
   }
 }
 

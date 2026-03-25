@@ -72,7 +72,7 @@ export default function RewardsTab() {
       <div className="flex items-center justify-center py-20">
         <div className="flex flex-col items-center gap-3">
           <div className="w-10 h-10 border-4 border-primary/20 border-t-primary rounded-full animate-spin" />
-          <p className="text-sm text-gray-500">Loading rewards...</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400 dark:text-gray-500">Loading rewards...</p>
         </div>
       </div>
     )
@@ -98,7 +98,7 @@ export default function RewardsTab() {
         <div className="text-4xl font-extrabold">⭐ {totalPoints} pts</div>
       </div>
 
-      <h2 className="text-lg font-bold text-gray-900">Reward menu</h2>
+      <h2 className="text-lg font-bold text-gray-900 dark:text-gray-100">Reward menu</h2>
 
       <div className="grid grid-cols-1 gap-3">
         {rewards.map((reward) => {
@@ -120,7 +120,7 @@ export default function RewardsTab() {
                     className={`text-xs font-bold px-2 py-0.5 rounded-full ${
                       unlocked
                         ? 'bg-primary text-white'
-                        : 'bg-gray-100 text-gray-600'
+                        : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 dark:text-gray-500'
                     }`}
                   >
                     {reward.cost} pts
@@ -131,11 +131,11 @@ export default function RewardsTab() {
                     </span>
                   )}
                 </div>
-                <p className="font-semibold text-gray-900 mt-1 text-sm leading-snug">
+                <p className="font-semibold text-gray-900 dark:text-gray-100 mt-1 text-sm leading-snug">
                   {reward.name}
                 </p>
                 {!unlocked && (
-                  <p className="text-xs text-gray-400 mt-0.5">
+                  <p className="text-xs text-gray-400 dark:text-gray-500 mt-0.5">
                     {ptsNeeded} more pts needed
                   </p>
                 )}
@@ -151,7 +151,7 @@ export default function RewardsTab() {
                     {redeeming === reward.name ? '...' : 'Redeem'}
                   </button>
                 ) : (
-                  <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center text-gray-300 text-xl">
+                  <div className="w-10 h-10 rounded-full bg-gray-100 dark:bg-gray-800 flex items-center justify-center text-gray-300 text-xl">
                     🔒
                   </div>
                 )}
@@ -161,7 +161,7 @@ export default function RewardsTab() {
         })}
       </div>
 
-      <p className="text-xs text-center text-gray-400 pb-4">
+      <p className="text-xs text-center text-gray-400 dark:text-gray-500 pb-4">
         Redeeming a reward deducts points from your balance
       </p>
     </div>

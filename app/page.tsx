@@ -12,14 +12,14 @@ const tabs: { id: Tab; label: string; emoji: string }[] = [
   { id: 'rules', label: 'Rules', emoji: '📋' },
   { id: 'tracker', label: 'Tracker', emoji: '⭐' },
   { id: 'rewards', label: 'Rewards', emoji: '🎁' },
-  { id: 'buster', label: 'Buster', emoji: '🎲' },
+  { id: 'buster', label: 'I am bored', emoji: '🎲' },
 ]
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<Tab>('tracker')
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50">
+    <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900">
       {/* Fixed header */}
       <header className="sticky top-0 z-30 bg-primary text-white shadow-md">
         <div className="max-w-lg mx-auto px-4 py-3 flex items-center justify-between">
@@ -28,7 +28,7 @@ export default function Home() {
         </div>
 
         {/* Tab bar */}
-        <div className="bg-white border-b border-gray-100">
+        <div className="bg-white dark:bg-gray-800 border-b border-gray-100 dark:border-gray-800">
           <div className="max-w-lg mx-auto flex">
             {tabs.map((tab) => (
               <button

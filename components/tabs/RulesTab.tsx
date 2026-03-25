@@ -14,19 +14,19 @@ const earningRules = [
 export default function RulesTab() {
   return (
     <div className="space-y-4">
-      <h2 className="text-xl font-bold text-gray-900">The Rules</h2>
+      <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100">The Rules</h2>
 
       {/* School Days */}
       <div className="card border-l-4 border-l-red-400">
         <div className="flex items-center gap-2 mb-3">
           <span className="text-xl">🚫</span>
-          <h3 className="font-bold text-gray-900">School Days (Mon–Fri)</h3>
+          <h3 className="font-bold text-gray-900 dark:text-gray-100">School Days (Mon–Fri)</h3>
         </div>
         <ul className="space-y-2">
-          <li className="flex items-center gap-2 text-sm text-red-700 bg-red-50 rounded-lg px-3 py-2">
+          <li className="flex items-center gap-2 text-sm text-red-700 dark:text-red-300 bg-red-50 rounded-lg px-3 py-2">
             <span className="font-bold">NO</span> PlayStation
           </li>
-          <li className="flex items-center gap-2 text-sm text-red-700 bg-red-50 rounded-lg px-3 py-2">
+          <li className="flex items-center gap-2 text-sm text-red-700 dark:text-red-300 bg-red-50 rounded-lg px-3 py-2">
             <span className="font-bold">NO</span> phone
           </li>
         </ul>
@@ -36,12 +36,12 @@ export default function RulesTab() {
       <div className="card border-l-4 border-l-green-500">
         <div className="flex items-center gap-2 mb-3">
           <span className="text-xl">✅</span>
-          <h3 className="font-bold text-gray-900">Earn Points</h3>
+          <h3 className="font-bold text-gray-900 dark:text-gray-100">Earn Points</h3>
         </div>
         <div className="bg-earn-bg rounded-xl overflow-hidden">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-green-200">
+              <tr className="border-b border-green-200 dark:border-green-800">
                 <th className="text-left px-3 py-2 text-earn-text font-semibold">Activity</th>
                 <th className="text-right px-3 py-2 text-earn-text font-semibold">Points</th>
               </tr>
@@ -50,11 +50,11 @@ export default function RulesTab() {
               {earningRules.map((rule, i) => (
                 <tr
                   key={i}
-                  className={`border-b border-green-100 last:border-0 ${i % 2 === 0 ? '' : 'bg-green-50/50'}`}
+                  className={`border-b border-green-100 dark:border-green-900 last:border-0 ${i % 2 === 0 ? '' : 'bg-green-50/50 dark:bg-green-900/20'}`}
                 >
                   <td className="px-3 py-2.5 text-earn-text">{rule.activity}</td>
                   <td className="px-3 py-2.5 text-right">
-                    <span className="font-bold text-earn-text bg-white rounded-full px-2 py-0.5 text-xs shadow-sm">
+                    <span className="font-bold text-earn-text bg-white dark:bg-gray-800 rounded-full px-2 py-0.5 text-xs shadow-sm">
                       +{rule.points}
                     </span>
                   </td>
@@ -69,18 +69,18 @@ export default function RulesTab() {
       <div className="card border-l-4 border-l-primary">
         <div className="flex items-center gap-2 mb-3">
           <span className="text-xl">🎮</span>
-          <h3 className="font-bold text-gray-900">Spend Points</h3>
+          <h3 className="font-bold text-gray-900 dark:text-gray-100">Spend Points</h3>
         </div>
         <div className="space-y-2">
-          <div className="flex items-center justify-between bg-purple-50 rounded-lg px-3 py-2.5">
-            <span className="text-sm text-purple-900">1hr PlayStation (weekend)</span>
-            <span className="font-bold text-primary bg-white rounded-full px-2 py-0.5 text-xs shadow-sm">
-              10 pts
+          <div className="flex items-center justify-between bg-purple-50 dark:bg-purple-900/30 rounded-lg px-3 py-2.5">
+            <span className="text-sm text-purple-900 dark:text-purple-200">1hr PlayStation (weekend)</span>
+            <span className="font-bold text-primary bg-white dark:bg-gray-800 rounded-full px-2 py-0.5 text-xs shadow-sm">
+              15 pts
             </span>
           </div>
-          <div className="flex items-center justify-between bg-purple-50 rounded-lg px-3 py-2.5">
-            <span className="text-sm text-purple-900">30min phone (weekend)</span>
-            <span className="font-bold text-primary bg-white rounded-full px-2 py-0.5 text-xs shadow-sm">
+          <div className="flex items-center justify-between bg-purple-50 dark:bg-purple-900/30 rounded-lg px-3 py-2.5">
+            <span className="text-sm text-purple-900 dark:text-purple-200">30min phone (weekend)</span>
+            <span className="font-bold text-primary bg-white dark:bg-gray-800 rounded-full px-2 py-0.5 text-xs shadow-sm">
               5 pts
             </span>
           </div>
@@ -91,14 +91,14 @@ export default function RulesTab() {
       <div className="card border-l-4 border-l-amber-400">
         <div className="flex items-center gap-2 mb-3">
           <span className="text-xl">⏱️</span>
-          <h3 className="font-bold text-gray-900">Daily Caps</h3>
+          <h3 className="font-bold text-gray-900 dark:text-gray-100">Daily Caps</h3>
         </div>
         <ul className="space-y-2">
-          <li className="flex items-start gap-2 text-sm text-amber-800 bg-amber-50 rounded-lg px-3 py-2.5">
+          <li className="flex items-start gap-2 text-sm text-amber-800 dark:text-amber-200 bg-amber-50 dark:bg-amber-900/30 rounded-lg px-3 py-2.5">
             <span className="mt-0.5">•</span>
             Max 2hrs/day PlayStation on weekends
           </li>
-          <li className="flex items-start gap-2 text-sm text-amber-800 bg-amber-50 rounded-lg px-3 py-2.5">
+          <li className="flex items-start gap-2 text-sm text-amber-800 dark:text-amber-200 bg-amber-50 dark:bg-amber-900/30 rounded-lg px-3 py-2.5">
             <span className="mt-0.5">•</span>
             Max 1hr/day phone on weekends
           </li>
@@ -109,7 +109,7 @@ export default function RulesTab() {
       <div className="card border-l-4 border-l-slate-500">
         <div className="flex items-center gap-2 mb-3">
           <span className="text-xl">📌</span>
-          <h3 className="font-bold text-gray-900">Non-Negotiables</h3>
+          <h3 className="font-bold text-gray-900 dark:text-gray-100">Non-Negotiables</h3>
         </div>
         <ul className="space-y-2">
           {[
@@ -120,7 +120,7 @@ export default function RulesTab() {
           ].map((rule, i) => (
             <li
               key={i}
-              className="flex items-start gap-2 text-sm text-slate-700 bg-slate-50 rounded-lg px-3 py-2.5"
+              className="flex items-start gap-2 text-sm text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-slate-800/50 rounded-lg px-3 py-2.5"
             >
               <span className="mt-0.5 text-slate-400">•</span>
               {rule}
